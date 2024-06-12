@@ -20,9 +20,6 @@
 // 3. add Array
 // let Array2 = [0,...A4];
 // console.log(Array2);
-
-
-
 let a=50.47;
 let result = Math.floor(a);
 var id = Math.floor(Math.random()*100+1);
