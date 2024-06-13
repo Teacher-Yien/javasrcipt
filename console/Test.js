@@ -1,7 +1,18 @@
 document.write("<h1>Hell javascript</h1>");
-let id,name,sex,school,cshap ,web,ooAD,total;
+let id,name,sex,school,csharp ,web,ooAD,total=0;
 id = prompt("Input ID: 🤑");
 name = prompt("Input Name: 👉");
+sex = prompt("Input Sex: ");
+school = prompt("Input School: ");
+csharp = parseFloat(prompt("Input csharp: "));
+web = parseFloat(prompt("Input website: "));
+ooAD = parseFloat(prompt("Input ooAD: "));
+total=web+csharp+ooAD;
 document.write(`<h2>My Name: ${name}  </h2>`);
 document.write(`<h2>ID is: ${id}</h2>`);
-export{}
+document.write(`<h2>Sex is: ${sex}</h2>`);
+document.write(`<h2>School is: ${school}</h2>`);
+document.write(`<h2>csharp is: ${csharp}</h2>`);
+document.write(`<h2>Website is: ${web}</h2>`);
+document.write(`<h2>ooAD is: ${web}</h2>`);
+document.write(`<h2>Total is: ${total}</h2>`);
