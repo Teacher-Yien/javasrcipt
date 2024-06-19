@@ -9,7 +9,8 @@ var Obj =
 	{id:1002,Name:"Nana",School:"IFL"},
 	{id:9,Name:"Nana",School:"IFL"},
 ]
-Obj.pop();
+//Obj.pop();
+Obj.shift()
 console.log(Obj);
 
 
