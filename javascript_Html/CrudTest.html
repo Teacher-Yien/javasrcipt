@@ -1,39 +1,117 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  <div class=" container mt-4">
-		<h1 class=" text-center">Crud in javascript</h1>
-		<div class=" row">
-			  <div class=" col-md-6 p-3">
-					  <form action="" class=" border border-danger rounded bg-primary p-3">
-							<h1 class=" text-center text-light">Add products</h1>
-							<label for="user" class=" text-light">username:</label>
-							<input type="text" placeholder="Enter name ..." class=" form-control">
-							<label for="price" class=" text-light">Price:</label>
-							<input type="text" placeholder="Enter name ..." class=" form-control">
-							<label for="qty" class=" text-light">Quality:</label>
-							<input type="text" placeholder="Enter name ..." class=" form-control">
-							<button class=" btn btn-success mt-2">Add products</button>
-							<button class=" btn btn-dark mt-2">Update products</button>
-						</form>
-				</div>
-				<div class=" col-md-6">
-						<div class=" bg-dark p-3 rounded mt-3">
-							<table class=" table table-bordered table-dark p-2">
-								  <tr>
-										<th>Name</th>
-										<th>price</th>
-										<th>Quality</th>
-									</tr>
-							</table>
-						</div>
-				</div>
-		</div> 
-	</div>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="bg-dark p-3 rounded">
+          <label for="user" class="text-light">Name:</label>
+          <input type="text" id="user" placeholder="Enter name..." class="form-control">
+          <label for="price" class="text-light">Price:</label>
+          <input type="text" id="price" placeholder="Enter price..." class="form-control">
+          <label for="qty" class="text-light">Quality:</label>
+          <input type="text" id="qty" placeholder="Enter quality..." class="form-control">
+          <button onclick="AddProducts() " class="btn btn-success mt-2">Add Product</button>
+          <button onclick="updateProduct()" class="btn btn-success mt-2">Update Product</button>
+          <button onclick="DeleteRow()" class="btn btn-danger mt-2">Delete Product</button>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="bg-dark p-3 rounded mt-3">
+          <table id="productTableBody" class="table table-bordered table-dark table-hover p-2">
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quality</th>
+            </tr>
+          
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  let rIndex, table = document.getElementById("productTableBody");
+
+  function AddProducts() {
+    newRow = table.insertRow(table.length);
+    col1 = newRow.insertCell(0);
+    col2 = newRow.insertCell(1);
+    col3 = newRow.insertCell(2);
+  let  name = document.getElementById("user").value;
+  let  price = document.getElementById("price").value;
+  let  qty = document.getElementById("qty").value;
+    col1.innerHTML = name;
+    col2.innerHTML = price;
+    col3.innerHTML = qty;
+    getSelectedRow();
+  }
+
+  function getSelectedRow() {
+  for (var i = 0; i < table.rows.length; i++) {
+    table.rows[i].onclick = function() {
+      // Remove highlight from previously selected row
+      if (rIndex !== undefined) {
+        table.rows[rIndex].classList.remove("selected");
+      }
+
+      rIndex = this.rowIndex;
+      // Highlight the selected row
+    
+      this.classList.add("selected");
+
+      // Populate input fields with the selected row data
+      document.getElementById("user").value = this.cells[0].innerHTML;
+      document.getElementById("price").value = this.cells[1].innerHTML;
+      document.getElementById("qty").value = this.cells[2].innerHTML;
+    };
+  }
+}
+
+  function updateProduct() {
+    // Check if a row is selected
+    if (rIndex === undefined) {
+      alert("Please select a row to update!");
+      return;
+    }
+
+    var newName = document.getElementById("user").value;
+    var newPrice = document.getElementById("price").value;
+    var newQty = document.getElementById("qty").value;
+
+    // var row = ;
+    table.rows[rIndex].cells[0].innerHTML = newName;
+    table.rows[rIndex].cells[1].innerHTML = newPrice;
+    table.rows[rIndex].cells[2].innerHTML = newQty;
+
+    // Clear input fields after update
+    document.getElementById("user").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("qty").value = "";
+  }
+
+  function DeleteRow() {
+    if (rIndex === undefined) {
+      alert("Please select a row to delete!");
+      return;
+    }
+    table.deleteRow(rIndex);
+    // Clear input fields after delete
+    document.getElementById("user").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("qty").value = "";
+  }
+
+  getSelectedRow();
+</script>
 </body>
 </html>

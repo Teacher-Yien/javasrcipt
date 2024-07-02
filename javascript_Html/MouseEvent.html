@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Events Example</title>
+</head>
+<body>
+    <div id="myElement" style="width: 200px; height: 200px; background-color: lightblue;"></div>
+		<img id="myImage" src="https://images.pexels.com/photos/14918477/pexels-photo-14918477.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" width="300" height="200" alt="Initial Image">
+
+
+    <script>
+
+        const element = document.getElementById('myElement');
+				// Get a reference to the image element
+				const imageElement = document.getElementById('myImage');
+
+				// Store the initial image source and alternate image source
+				const initialImageSrc = 'initial-image.jpg';
+				const alternateImageSrc = 'alternate-image.jpg';
+
+				// Add event listeners for mouseover and mouseout
+				imageElement.addEventListener('mouseover', function() {
+					imageElement.src = alternateImageSrc; // Change the image source on mouseover
+				});
+
+				imageElement.addEventListener('mouseout', function() {
+					imageElement.src = initialImageSrc; // Change back to initial image source on mouseout
+				});
+
+
+        element.addEventListener('click', handleClick);
+        element.addEventListener('mouseover', handleMouseOver);
+        element.addEventListener('mouseout', handleMouseOut);
+        element.addEventListener('mousemove', handleMouseMove);
+
+        function handleClick(event) {
+            console.log('Mouse clicked!');
+            // Additional handling code here
+        }
+
+        function handleMouseOver(event) {
+            console.log('Mouse over the element!');
+            // Additional handling code here
+        }
+
+        function handleMouseOut(event) {
+            console.log('Mouse left the element!');
+            // Additional handling code here
+        }
+
+        function handleMouseMove(event) {
+            console.log('Mouse moved over the element!');
+            // Additional handling code here
+        }
+    </script>
+</body>
+</html>

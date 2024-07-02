@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="SendEmail.css">
+</head>
+<body>
+	<div class="container">
+		<h2>Get in Touch</h2>
+		<form onsubmit="emailSend(); reset(); return false;">
+			<input type="text" id="name" placeholder="name" name="name" required>
+			<input type="text" id="phone" placeholder="phone" name="phone" required>
+			<input type="email" id="email" placeholder="email" name="email" required>
+			<button type="submit" class="btn">submit</button>
+		</form>
+	</div> 
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://smtpjs.com/v3/smtp.js">
+</script>
+	<script >
+		function emailSend(){
+
+var userName = document.getElementById('name').value;
+var phone = document.getElementById('phone').value;
+var email = document.getElementById('email').value;
+
+var messageBody = "Name " + userName +
+"<br/> Phone " + phone +
+"<br/> Email " + email;
+Email.send({
+	Host : "smtp.elasticemail.com",
+	Username : "",
+	Password : "9E1E8A8D35CF9AF7A5E41752E82DD0251213",
+	To : 'sothyienwed@gmail.com',
+	From : "brossyien@gmail.com",
+	Subject : "This is the subject",
+	Body : messageBody
+}).then(
+message => {
+	if(message=='OK'){
+		swal("Secussful", "You clicked the button!", "success");
+	}
+	else{
+		swal("Error", "You clicked the button!", "error");
+	}
+}
+);
+}
+	</script>
+</body>
+</html>

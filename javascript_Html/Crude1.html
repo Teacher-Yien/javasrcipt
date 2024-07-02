@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container mt-5">
+		<h1 class=" text-center text-success text-capitalize">Crud in javascript</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="bg-primary p-3 rounded">
+					<h1 class=" text-center text-danger">Add products</h1>
+          <label for="user" class="text-light">Name:</label>
+          <input required type="text" id="user" placeholder="Enter name..." class="form-control">
+          <label for="price" class="text-light">Price:</label>
+          <input required  type="text" id="price" placeholder="Enter price..." class="form-control">
+          <label for="qty" class="text-light">Quantity:</label>
+          <input required  type="text" id="qty" placeholder="Enter quality..." class="form-control">
+          <button onclick="AddProducts()" class="btn btn-success mt-2">Add Product</button>
+					
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="bg-dark p-3 rounded mt-1">
+          <table class="table table-bordered table-dark p-1">
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+							 <th>Action</th>
+            </tr>
+            <tbody id="productTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+			let rIndex, table = document.getElementById("productTableBody");
+
+	function AddProducts() {
+			let newRow = table.insertRow(table.length);
+			let name = document.getElementById("user").value.trim();
+			let price = document.getElementById("price").value.trim();
+			let qty = document.getElementById("qty").value.trim();
+
+			if (name === "" && price === "" && qty === "") {
+					alert("Please fill in all fields");
+					return;
+			} else {
+					if (name === "") {
+							showError("name");
+							return;
+					} else if (price === "") {
+							showError("price");
+							return;
+					} else if (qty === "") {
+							showError("quantity");
+							return;
+					}
+
+					let col1 = newRow.insertCell(0);
+					let col2 = newRow.insertCell(1);
+					let col3 = newRow.insertCell(2);
+					let col4 = newRow.insertCell(3);
+
+					col1.innerHTML = name;
+					col2.innerHTML = price;
+					col3.innerHTML = qty;
+					col4.innerHTML = `
+					<button class=" btn btn-danger " onclick="UpdateProduct(this)">Update</button>
+					<button class=" btn btn-warning" onclick="DeleteRow(this)">Delete</button>
+					`;
+					clearInputFields(); 
+			}
+	}
+
+				function showError(field) {
+						alert("You cannot insert a product without a valid " + field + ".");
+				}
+				function UpdateProduct(button) {
+									var row = button.parentNode.parentNode;
+									var name = row.cells[0].innerHTML;
+									var price = row.cells[1].innerHTML;
+									var qty = row.cells[2].innerHTML;
+
+									document.getElementById("user").value = name;
+									document.getElementById("price").value = price;
+									document.getElementById("qty").value = qty;
+									row.remove();
+				}
+
+				function DeleteRow(button) {
+            var row = button.parentNode.parentNode;
+            row.remove();
+        }
+				function clearInputFields() {
+            document.getElementById("user").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("qty").value = "";
+        }
+		
+
+</script>
+</html>
